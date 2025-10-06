@@ -88,7 +88,6 @@ export function Sidebar({
           priority
         />
       </Link>
-      <h2 className="text-xl font-semibold mb-4 text-gray-200">文章目錄</h2>
       <NavList nodes={navTree} currentSlug={currentSlug} />
     </aside>
   );
