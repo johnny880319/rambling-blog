@@ -6,7 +6,8 @@ const postsDirectory = path.join(process.cwd(), "src/posts");
 
 export interface PostFrontmatter {
   title: string;
-  date: string;
+  createdDate: string;
+  lastModifiedDate?: string;
 }
 
 export interface PostData {
