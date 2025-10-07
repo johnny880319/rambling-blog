@@ -16,7 +16,10 @@ export default function Home() {
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <div className="mb-2 tracking-[-.01em]">
             <p>這裡是一個數學系畢業的不專業工程師亂講話的地方。</p>
-            <p>平常工作是用python打雜，但突然想學寫網頁。</p>
+            <p>平常工作是用python打雜。</p>
+            <p>
+              某天突然想到，如果能寫一個部落格放自己的筆記，一定超帥的吧......
+            </p>
             <p>所以就出現了這個東西。</p>
           </div>
         </ol>
