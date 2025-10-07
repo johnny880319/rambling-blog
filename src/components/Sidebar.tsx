@@ -30,15 +30,15 @@ function NavList({
           <li key={nodePath}>
             <Link
               href={`/posts/${nodePath}`}
-              className={`block rounded-md px-2 py-1 transition-colors flex flex-wrap ${
+              className={`block rounded-md px-2 py-1 transition-colors flex flex-wrap group ${
                 // Highlight active link
                 isActive
                   ? "font-bold text-white bg-blue-500"
-                  : "hover:bg-gray-200"
+                  : "hover:bg-gray-200 hover:text-gray-800"
               }`}
             >
               <Image
-                className="dark:invert"
+                className="dark:invert group-hover:dark:invert-0"
                 aria-hidden
                 src={
                   isLeaf
