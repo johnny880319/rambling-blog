@@ -1,22 +1,8 @@
 import { getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
-import style from "./post-styles.module.css";
-
-// Define custom heading components with specific styles
-type HeadingProps = React.PropsWithChildren<
-  React.HTMLAttributes<HTMLHeadingElement>
->;
-
-// Map heading levels to custom components
-const components = {
-  h1: (props: HeadingProps) => <h1 className={style.h1} {...props} />,
-  h2: (props: HeadingProps) => <h2 className={style.h2} {...props} />,
-  h3: (props: HeadingProps) => <h3 className={style.h3} {...props} />,
-  h4: (props: HeadingProps) => <h4 className={style.h4} {...props} />,
-  h5: (props: HeadingProps) => <h5 className={style.h5} {...props} />,
-  h6: (props: HeadingProps) => <h6 className={style.h6} {...props} />,
-};
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 export default async function PostPage({
   params,
@@ -40,7 +26,15 @@ export default async function PostPage({
         </p>
 
         <div className="prose-content">
-          <MDXRemote source={post.content} components={components} />
+          <MDXRemote
+            source={post.content}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkMath],
+                rehypePlugins: [[rehypeKatex, { output: "mathml" }]],
+              },
+            }}
+          />
         </div>
       </article>
     </main>
