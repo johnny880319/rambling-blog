@@ -1,6 +1,6 @@
 import typography from "@tailwindcss/typography";
 
-module.exports = {
+const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,7 +8,14 @@ module.exports = {
     "./src/posts/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: "#171717",
+        foreground: "#ffffff",
+      },
+    },
   },
   plugins: [typography],
 };
+
+export default config;
