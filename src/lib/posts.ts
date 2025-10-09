@@ -8,6 +8,7 @@ export interface PostFrontmatter {
   title: string;
   createdDate: string;
   lastModifiedDate?: string;
+  description?: string;
 }
 
 export interface PostData {
