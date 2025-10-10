@@ -80,7 +80,6 @@ export function Sidebar({
         className="block rounded-md px-2 py-1 transition-colors hover:bg-gray-700 text-2xl"
       >
         <Image
-          className="dark:invert"
           src="/images/logos/my_blog_logo.svg"
           alt="My Logo"
           width={500}
