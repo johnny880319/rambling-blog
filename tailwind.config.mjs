@@ -1,6 +1,7 @@
 import typography from "@tailwindcss/typography";
 
 const config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,8 +11,8 @@ const config = {
   theme: {
     extend: {
       colors: {
-        background: "#171717",
-        foreground: "#ffffff",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
       },
       typography: {
         DEFAULT: {

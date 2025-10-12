@@ -33,12 +33,12 @@ function NavList({
               className={`block rounded-md px-2 py-1 transition-colors flex flex-wrap group ${
                 // Highlight active link
                 isActive
-                  ? "font-bold text-white bg-blue-500"
-                  : "hover:bg-gray-200 hover:text-gray-800"
+                  ? "font-bold text-foreground bg-stone-400 dark:bg-gray-600"
+                  : "hover:bg-foreground hover:text-background"
               }`}
             >
               <Image
-                className="dark:invert group-hover:dark:invert-0"
+                className="group-hover:invert dark:invert dark:group-hover:invert-0"
                 aria-hidden
                 src={
                   isLeaf
@@ -74,10 +74,10 @@ export function Sidebar({
   currentSlug: string[];
 }) {
   return (
-    <aside className="h-screen sticky top-0 w-full overflow-y-auto border-r bg-slate-800 p-4">
+    <aside className="h-screen sticky top-0 w-full overflow-y-auto bg-stone-200 dark:bg-slate-800 p-4">
       <Link
         href="/"
-        className="block rounded-md px-2 py-1 transition-colors hover:bg-gray-700 text-2xl"
+        className="block rounded-md px-2 py-1 transition-colors hover:bg-stone-300 dark:hover:bg-slate-700 text-2xl"
       >
         <Image
           src="/images/logos/my_blog_logo.svg"
