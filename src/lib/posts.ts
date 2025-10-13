@@ -9,6 +9,7 @@ export interface PostFrontmatter {
   createdDate: string;
   lastModifiedDate?: string;
   description?: string;
+  postPriority?: number;
 }
 
 export interface PostData {
@@ -53,6 +54,7 @@ export interface NavNode {
   name: string; // folder name
   title: string; // title for display (from frontmatter)
   slug: string[]; // complete slug path array
+  postPriority: number; // priority for sorting the posts in the sidebar
   children: NavNode[]; // child nodes
 }
 
@@ -80,6 +82,7 @@ export async function getPostsHierarchy(
 
   const indexFilePath = path.join(directory, "index.mdx");
   let title = path.basename(directory); // default title
+  let postPriority = Number.MAX_SAFE_INTEGER; // default priority
   let hasIndexFile = false;
   try {
     const fileContents = await fs.promises.readFile(indexFilePath, "utf8");
@@ -87,6 +90,9 @@ export async function getPostsHierarchy(
     hasIndexFile = true;
     if (data.title) {
       title = data.title;
+    }
+    if (data.postPriority) {
+      postPriority = data.postPriority;
     }
   } catch (error) {
     if (
@@ -111,6 +117,7 @@ export async function getPostsHierarchy(
       title: title,
       slug: basePath,
       children: children.flat(),
+      postPriority: postPriority,
     });
   }
   return nodes;
