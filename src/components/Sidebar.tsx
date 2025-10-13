@@ -16,6 +16,11 @@ function NavList({
     return null;
   }
 
+  // sort nodes by title alphabetically
+  nodes.sort(
+    (a, b) => a.postPriority - b.postPriority || a.title.localeCompare(b.title),
+  );
+
   const currentPath = currentSlug.join("/");
 
   return (
