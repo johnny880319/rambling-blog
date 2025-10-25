@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rambling Blog
 
-## Getting Started
+This is the source code for my personal blog, "Rambling Blog." It's built with Next.js, Tailwind CSS, and MDX to provide a clean, fast, and developer-friendly platform for my notes, thoughts, and technical explorations.
 
-First, run the development server:
+### A Note on Development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project was built as a learning exercise by a beginner in TypeScript, React, and Next.js. Many features are still in their early stages, and the implementation may not always follow best practices. I am actively working on improving the codebase and will be adding more features over time.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+My development log is kept on the blog itself. It's currently written in Chinese, and you're welcome to check it out to follow my progress.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌐 Live Site
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can visit the live blog here: **[Rambling Note](https://rambling-blog.vercel.app)**
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*   **Tree-like Structure**: Posts are organized in a hierarchical, tree-like structure based on the file system, allowing for intuitive categorization.
+*   **MDX Support**: Content is written in Markdown with the ability to seamlessly embed React components.
+*   **Mathematical Equations**: Integrated with **MathJax** to support beautiful math typesetting using LaTeX syntax.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*   **Framework**: [Next.js](https://nextjs.org/)
+*   **Language**: [TypeScript](https://www.typescriptlang.org/)
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+*   **Content**: [MDX](https://mdxjs.com/)
+*   **Math Typesetting**: [MathJax](https://www.mathjax.org/)
