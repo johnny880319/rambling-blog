@@ -2,8 +2,8 @@ import { getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next/";
 import { notFound } from "next/navigation";
-import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import rehypeMathJax from "rehype-mathjax";
 
 export async function generateMetadata({
   params,
@@ -50,7 +50,7 @@ export default async function PostPage({
             options={{
               mdxOptions: {
                 remarkPlugins: [remarkMath],
-                rehypePlugins: [[rehypeKatex, { output: "mathml" }]],
+                rehypePlugins: [rehypeMathJax],
               },
             }}
           />

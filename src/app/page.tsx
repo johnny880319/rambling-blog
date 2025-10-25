@@ -25,13 +25,31 @@ export default function Home() {
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <Link
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
+            className={`
+              // boarder
+              rounded-full border border-solid
+              // flexibility
+              flex items-center justify-center gap-2
+              // colors of box and text
+              transition-colors bg-foreground text-background hover:bg-[#383838] dark:hover:bg-[#ccc]
+              // font and responsiveness
+              font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto w-full
+            `}
             href="/posts"
           >
             查看文章
           </Link>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px] gap-2"
+            className={`
+              // boarder
+              rounded-full border border-solid border-black/[.2] dark:border-white/[.3]
+              // flexibility
+              flex items-center justify-center gap-2
+              // colors of box and text
+              transition-colors bg-background text-foreground hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent 
+              // font and responsiveness
+              font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto w-full
+            `}
             href="https://github.com/johnny880319/rambling-blog"
             target="_blank"
             rel="noopener noreferrer"
