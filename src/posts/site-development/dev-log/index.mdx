@@ -1,0 +1,106 @@
+---
+title: "開發日誌"
+createdDate: "2025-10-22"
+lastModifiedDate: "2025-10-22"
+postPriority: 1
+---
+
+---
+
+雖然是開發日誌，但我好像寫得有點像更新日誌。
+不然先把這裡當中文版且有附上一些碎碎念的更新日誌好了。
+之後比較熟悉開發日誌的寫法之後再在專案根目錄補個全英文的CHANGELOG.md。
+
+更新日誌的寫法參考了這篇: [如何維護更新日誌](https://keepachangelog.com/zh-TW/1.1.0/)
+
+關於語意化版本規範參考了這篇: [語意化版本 2.0.0](https://semver.org/lang/zh-TW/)
+
+---
+
+## [Unreleased]
+
+
+---
+
+## [v0.3.0] - 2025-10-22
+
+### 新增
+
+- 用[nextjs-toploader](https://www.npmjs.com/package/nextjs-toploader)來實現網頁載入進度條。
+  - 讓使用者在等待頁面載入時有個視覺反饋，提升使用體驗。
+  - 雖嘗試過[nprogress](https://github.com/rstacruz/nprogress)，但因不知明原因無法正常運作。
+
+- 實現深淺色模式
+  - 原本不打算那麼早實現，但發現不同使用者預設的系統主題不一樣，若沒有深淺色模式切換的話，
+    可能會導致部分使用者在瀏覽時感覺不適。
+
+- 實現文章排序功能
+  - 讓我現在可以在mdx的front-matter中加入`postPriority`欄位來決定文章在分類中的排序。
+  - 沒加入此欄位的文章會依照標題字母順序排序。並且優先級會在有設定優先級的文章之後。
+
+- 更新README，加入專案介紹及開發相關資訊。
+
+### 更動
+
+- 將渲染數學公式的套件從[katex](https://katex.org/)改為[mathjax](https://www.mathjax.org/)。
+  - mathjax雖然渲染速度較慢，但渲染出來的數學式比較美觀，且支援更多語法。
+
+---
+
+## [v0.2.1] - 2025-10-10
+
+### 修正
+
+- 修正svg圖檔在手機版面顯示異常的問題。
+  - 在svg檔直接嵌入文字導致無法正確縮放，改用路徑(path)來繪製文字後解決此問題。
+
+---
+
+## [v0.2.0] - 2025-10-10
+
+### 新增
+
+- 在首頁放上github, linkedin, 部落格原始碼的連結，部落格簡介及自己設計的logo。
+  並新增按鈕來連接到部落格文章。
+
+- 實現[MDX](https://mdxjs.com/)文件的自動加載及解析，以進行部落格文章的撰寫。
+    - 相較於純markdown，MDX能在文章中直接使用React元件，增加文章的互動性及可讀性。
+    - 適用[katex](https://katex.org/)語法來撰寫數學公式，提升技術文章的表達能力。
+    - 使用[gray-matter](https://github.com/jonschlinkert/gray-matter)來解析文章的front-matter metadata，方便管理文章的標題、日期、分類等資訊。
+
+- 使用tailwindcss(V3)來進行樣式設計。
+    - tailwindcss提供了高度可定制化的工具類別，能快速設計出響應式且美觀的介面。
+    - 雖嘗試使用V4版本，但發現與MDX的渲染有衝突，嘗試了多種方法仍無法解決，故暫時回退至V3版本。
+
+- 用樹狀結構來呈現文章分類，並設計能自動展開及收合的Sidebar來列出文章目錄。
+
+### 開發相關
+
+- 將ESLint(V9)及Prettier引入開發流程。
+    - ESLint目前無法與vscode extension整合，之後考慮降版到V8。
+
+---
+
+## [v0.1.1] - 2025-10-04
+
+### 開發相關
+
+- 開始用[pnpm](https://pnpm.io/)管理套件
+    - 相對於[npm](https://www.npmjs.com/)，pnpm能更有效率地管理node_modules，並使用樹狀結構讓套件的相依性更清晰。
+
+- 初步設計將此專案分成main, release, develop三個主要分支進行開發。
+    - main: 穩定版本，vercel自動部署的分支。每次更新都會向前推一個版本號。
+      hotfix也會直接從這裡拉出分支進行修正，完成後再合併回main。
+    - release: 準備發佈的版本。會在vercel上有一個preview的部署，確保沒有問題後再合併進main。
+    - develop: 開發中的版本。所有新功能都會從這裡拉出feature分支進行開發，完成後再合併回develop。
+      會從main拉取更新，確保develop不會落後。
+
+---
+## [v0.1.0] - 2025-10-04
+
+### 新增
+
+- 用 [Next.js 15.5.4](https://nextjs.org/) 初始化專案
+    - 因第一次使用Next.js，因此初始化後就直接訂為第一個版本，確保有一個穩定的基礎版本可以回溯。
+
+---
