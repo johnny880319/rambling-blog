@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
@@ -19,9 +19,7 @@ export interface PostData {
   content: string;
 }
 
-export async function getPostBySlug(
-  slug: string[] | undefined,
-): Promise<PostData | null> {
+export async function getPostBySlug(slug: string[] | undefined): Promise<PostData | null> {
   const slugPath = slug ? slug.join("/") : "";
   const fullPath = path.join(postsDirectory, slugPath, "index.mdx");
 
@@ -35,12 +33,7 @@ export async function getPostBySlug(
     };
   } catch (error) {
     // use multiple conditions to gurantee error is of type NodeJS.ErrnoException
-    if (
-      error &&
-      typeof error === "object" &&
-      "code" in error &&
-      error.code === "ENOENT"
-    ) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
       // do nothing
     } else {
       console.error(`Error reading slug at ${slugPath}:`, error);
@@ -62,7 +55,7 @@ export async function getPostsHierarchy(
   directory: string = postsDirectory,
   basePath: string[] = [],
 ): Promise<NavNode[]> {
-  let entries;
+  let entries: fs.Dirent[];
   try {
     entries = await fs.promises.readdir(directory, { withFileTypes: true });
   } catch (error) {
@@ -88,19 +81,14 @@ export async function getPostsHierarchy(
     const fileContents = await fs.promises.readFile(indexFilePath, "utf8");
     const { data } = matter(fileContents);
     hasIndexFile = true;
-    if (data.title) {
-      title = data.title;
+    if (data[title]) {
+      title = data[title];
     }
-    if (data.postPriority) {
-      postPriority = data.postPriority;
+    if (data[postPriority]) {
+      postPriority = data[postPriority];
     }
   } catch (error) {
-    if (
-      error &&
-      typeof error === "object" &&
-      "code" in error &&
-      error.code === "ENOENT"
-    ) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
       console.warn(`Warning: Missing index.mdx in ${directory}`);
     } else {
       console.error(`Error reading index.mdx at ${indexFilePath}:`, error);

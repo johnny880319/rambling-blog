@@ -1,25 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { NavNode } from "@/lib/posts";
 import Image from "next/image";
+import Link from "next/link";
+import type { NavNode } from "@/lib/posts";
 
 // recursive component to render navigation nodes
-function NavList({
-  nodes,
-  currentSlug,
-}: {
-  nodes: NavNode[];
-  currentSlug: string[];
-}) {
+function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string[] }) {
   if (!nodes || nodes.length === 0) {
     return null;
   }
 
   // sort nodes by title alphabetically
-  nodes.sort(
-    (a, b) => a.postPriority - b.postPriority || a.title.localeCompare(b.title),
-  );
+  nodes.sort((a, b) => a.postPriority - b.postPriority || a.title.localeCompare(b.title));
 
   const currentPath = currentSlug.join("/");
 
@@ -71,13 +63,7 @@ function NavList({
 }
 
 // main sidebar component
-export function Sidebar({
-  navTree,
-  currentSlug,
-}: {
-  navTree: NavNode[];
-  currentSlug: string[];
-}) {
+export function Sidebar({ navTree, currentSlug }: { navTree: NavNode[]; currentSlug: string[] }) {
   return (
     <aside className="h-screen sticky top-0 w-full overflow-y-auto bg-stone-200 dark:bg-slate-800 p-4">
       <Link

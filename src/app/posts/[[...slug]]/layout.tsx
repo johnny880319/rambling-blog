@@ -1,7 +1,7 @@
 // src/app/posts/[[...slug]]/layout.tsx
 
-import { getPostsHierarchy } from "@/lib/posts";
 import { Sidebar } from "@/components/Sidebar";
+import { getPostsHierarchy } from "@/lib/posts";
 
 export default async function PostsLayout({
   children,
