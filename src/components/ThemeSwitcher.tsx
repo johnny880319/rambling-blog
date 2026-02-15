@@ -18,6 +18,7 @@ export function ThemeSwitcher() {
   // after mounted, we can access the theme
   return (
     <button
+      type="button"
       className="p-2 rounded-md hover:bg-stone-300 dark:hover:bg-slate-700"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       aria-label="Toggle theme"
