@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+
+pnpm-lock.yaml text eol=lf
+package.json text eol=lf
+.biomeignore text eol=lf
+biome.json text eol=lf
