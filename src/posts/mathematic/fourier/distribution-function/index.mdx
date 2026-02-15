@@ -1,6 +1,7 @@
 ---
 title: "甚麼是dirac delta函數"
 createdDate: "2025-10-25"
+postPriority: 1
 ---
 
 $\newcommand{\downmapsto}{\style{display: inline-block; transform:rotate(0.75turn);}{\mapsto}}$
@@ -17,7 +18,9 @@ $\newcommand{\horizontalcolon}{\style{display: inline-block; transform:rotate(0.
 其他三種傅立葉變換都是他的特例。
 所以除非我們有特別標註，否則以下講的傅立葉變換都是指連續非週期的傅立葉變換。
 
-讓我們複習一下傅立葉變換的定義:
+而為何我這個章節會說傅立葉變換有不足之處呢，原因其實在於其總是需要計算從負無限到正無限的積分。這就導致其實很多常見的函數的傅立葉變換都沒辦法用積分去計算。
+
+再繼續討論之前，讓我們複習一下傅立葉變換的定義:
 
 對於一個Lebesgue可積函數 $f(x): \mathbb{R} \to \mathbb{C}$ (或著說 $f \in L^1(\mathbb{R}; \mathbb{C})$ )，其傅立葉變換為
 
@@ -155,6 +158,25 @@ def fourier_transform(
     ...
 
 ```
+
+順帶一提，這種把函數打到複數的mapping在泛函分析中被稱為 **"分佈"(distribution)**。大部分人對distribution的印象應該都是機率分佈(probability distribution)。而事實上機率分布確實是一個把函數打到複數的mapping，比如常態分佈可以把$f(x) = x$這個函數打到他的期望值。或是把$f(x) = x^2$這個函數打到他的variance:
+
+$$\mathbb{E}_{X \sim \mathcal{N}(0, 1)}[X] = \int_{-\infty}^{\infty} x \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} dx = 0$$
+
+$$\mathbb{E}_{X \sim \mathcal{N}(0, 1)}[X^2] = \int_{-\infty}^{\infty} x^2 \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} dx = 1$$
+
+如果用強調mapping的寫法:
+
+$$
+\begin{align*}
+T_{\mathcal{N}(0, 1)}: & L^{\infty}(\mathbb{R}; \mathbb{C}) & \to & \mathbb{C} \\
+& f & \mapsto & \int_{-\infty}^{\infty} f(x) \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} dx
+\end{align*}
+
+$$
+
+從這個角度我們可以說，原本的傅立葉變換的定義是把函數轉換成另一個函數，
+而這個新的定義則是把**分佈轉換成另一個分佈**。
 
 ---
 
