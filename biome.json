@@ -21,7 +21,8 @@
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "error",
-        "noArrayIndexKey": "error"
+        "noArrayIndexKey": "error",
+        "noUnknownAtRules": "off"
       },
       "style": {
         "noDefaultExport": "off",
