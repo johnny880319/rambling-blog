@@ -19,21 +19,35 @@ export interface PostData {
   content: string;
 }
 
+// Helper to define what we expect in the index.mdx frontmatter
+interface IndexFrontmatter {
+  title?: string;
+  postPriority?: number;
+}
+
+// Helper function to safely check error codes in TypeScript
+function isErrnoException(error: unknown): error is NodeJS.ErrnoException {
+  return !!error && typeof error === "object" && "code" in error;
+}
+
 export async function getPostBySlug(slug: string[] | undefined): Promise<PostData | null> {
   const slugPath = slug ? slug.join("/") : "";
   const fullPath = path.join(postsDirectory, slugPath, "index.mdx");
 
   try {
     const fileContents = await fs.promises.readFile(fullPath, "utf8");
-    const { data, content } = matter(fileContents);
+    const result = matter(fileContents);
+
+    // Explicitly cast data to strict PostFrontmatter
+    const data = result.data as PostFrontmatter;
+
     return {
       slug: slug || [],
-      frontmatter: data as PostData["frontmatter"],
-      content,
+      frontmatter: data,
+      content: result.content,
     };
   } catch (error) {
-    // use multiple conditions to gurantee error is of type NodeJS.ErrnoException
-    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+    if (isErrnoException(error) && error.code === "ENOENT") {
       // do nothing
     } else {
       console.error(`Error reading slug at ${slugPath}:`, error);
@@ -79,16 +93,16 @@ export async function getPostsHierarchy(
   let hasIndexFile = false;
   try {
     const fileContents = await fs.promises.readFile(indexFilePath, "utf8");
-    const { data } = matter(fileContents);
+    const { data } = matter(fileContents) as unknown as { data: IndexFrontmatter };
     hasIndexFile = true;
-    if (data[title]) {
-      title = data[title];
+    if (data.title) {
+      title = data.title;
     }
-    if (data[postPriority]) {
-      postPriority = data[postPriority];
+    if (data.postPriority !== undefined) {
+      postPriority = data.postPriority;
     }
   } catch (error) {
-    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+    if (isErrnoException(error) && error.code === "ENOENT") {
       console.warn(`Warning: Missing index.mdx in ${directory}`);
     } else {
       console.error(`Error reading index.mdx at ${indexFilePath}:`, error);
