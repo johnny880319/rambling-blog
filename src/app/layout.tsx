@@ -34,7 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="flex justify-end bg-stone-200 dark:bg-slate-800">
+          <header className="flex justify-end bg-stone-200 dark:bg-slate-800 w-full min-w-full">
             <ThemeSwitcher />
           </header>
           <NextTopLoader
