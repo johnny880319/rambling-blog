@@ -40,7 +40,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug?: st
             : post.frontmatter.createdDate}
         </p>
 
-        <div className="prose-content">
+        <div className="prose-content overflow-x-auto max-w-full">
           <MDXRemote
             source={post.content}
             options={{

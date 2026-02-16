@@ -12,8 +12,37 @@
   --foreground: rgb(245 245 244);
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+/* Prevent MathJax from expanding beyond container */
+mjx-container {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+mjx-container[display="true"] {
+  display: block !important;
+}
+
+mjx-container svg {
+  max-width: none; /* let SVG scroll inside the container */
+}
+
+/* Ensure code blocks and tables don't overflow either */
+.prose-content pre,
+.prose-content table,
+.prose-content .MathJax {
+  max-width: 100%;
+  overflow-x: auto;
 }

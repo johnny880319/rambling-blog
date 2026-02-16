@@ -15,11 +15,11 @@ export default async function PostsLayout({
 
   const currentSlug = (await params).slug || [];
   return (
-    <div className="flex w-full">
-      <div className="w-full max-w-xs md:w-1/4">
+    <div className="flex w-full overflow-x-clip">
+      <div className="w-full max-w-xs md:w-1/4 shrink-0">
         <Sidebar navTree={await navTree} currentSlug={currentSlug} />
       </div>
-      <main className="flex-1 p-8">
+      <main className="flex-1 min-w-0 p-8 overflow-x-hidden">
         {/* children represent the actual page content (page.tsx) */}
         {children}
       </main>
