@@ -1,0 +1,39 @@
+name: Sync Main to Develop & Content
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  back-propagation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git User
+        run: |
+          git config user.name "GitHub Action Bot"
+          git config user.email "action@github.com"
+
+      - name: Sync main -> develop
+        continue-on-error: true
+        run: |
+          echo "Syncing main to develop..."
+          git checkout develop
+          git merge main --no-edit
+          git push origin develop
+
+      - name: Sync main -> posts
+        continue-on-error: true
+        run: |
+          echo "Syncing main to posts..."
+          git checkout posts
+          git merge main --no-edit
+          git push origin posts
