@@ -1,6 +1,8 @@
 // src/app/posts/[[...slug]]/layout.tsx
 
 import { Sidebar } from "@/components/Sidebar";
+import { SidebarActivator } from "@/components/SidebarContext";
+import { SidebarWrapper } from "@/components/SidebarWrapper";
 import { getPostsHierarchy } from "@/lib/posts";
 
 export default async function PostsLayout({
@@ -15,14 +17,17 @@ export default async function PostsLayout({
 
   const currentSlug = (await params).slug || [];
   return (
-    <div className="flex w-full overflow-x-clip">
-      <div className="w-full max-w-xs md:w-1/4 shrink-0">
-        <Sidebar navTree={await navTree} currentSlug={currentSlug} />
+    <>
+      <SidebarActivator />
+      <div className="flex w-full overflow-x-clip h-[calc(100vh-2.5rem)]">
+        <SidebarWrapper>
+          <Sidebar navTree={await navTree} currentSlug={currentSlug} />
+        </SidebarWrapper>
+        <main className="flex-1 min-w-0 p-8 overflow-y-auto overflow-x-hidden">
+          {/* children represent the actual page content (page.tsx) */}
+          {children}
+        </main>
       </div>
-      <main className="flex-1 min-w-0 p-8 overflow-x-hidden">
-        {/* children represent the actual page content (page.tsx) */}
-        {children}
-      </main>
-    </div>
+    </>
   );
 }

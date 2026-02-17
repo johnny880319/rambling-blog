@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import { SidebarProvider } from "@/components/SidebarContext";
+import { SidebarToggle } from "@/components/SidebarToggle";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
@@ -34,9 +36,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="flex justify-end bg-stone-200 dark:bg-slate-800 w-full min-w-full">
-            <ThemeSwitcher />
-          </header>
           <NextTopLoader
             color="var(--foreground)"
             initialPosition={0.08}
@@ -48,7 +47,13 @@ export default function RootLayout({
             speed={200}
             shadow="0 0 10px #E5E7EB,0 0 5px #E5E7EB"
           />
-          {children}
+          <SidebarProvider>
+            <header className="sticky top-0 z-50 flex justify-between items-center bg-stone-200 dark:bg-slate-800 w-full min-w-full">
+              <SidebarToggle />
+              <ThemeSwitcher />
+            </header>
+            {children}
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
