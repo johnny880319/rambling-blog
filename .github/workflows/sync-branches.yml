@@ -30,10 +30,10 @@ jobs:
           git merge main --no-edit
           git push origin develop
 
-      - name: Sync main -> posts
+      - name: Sync main -> content
         continue-on-error: true
         run: |
-          echo "Syncing main to posts..."
-          git checkout posts
+          echo "Syncing main to content..."
+          git checkout content
           git merge main --no-edit
-          git push origin posts
+          git push origin content
