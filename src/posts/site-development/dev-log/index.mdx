@@ -1,6 +1,7 @@
 ---
 title: "開發日誌"
 createdDate: "2025-10-25"
+lastModifiedDate: "2026-02-17"
 postPriority: 1
 ---
 
@@ -18,6 +19,55 @@ postPriority: 1
 
 ## [Unreleased]
 
+## [v0.4.0] - 2026-02-17
+
+### 新增
+
+- 將之前的tag都補齊，tag內容參考了這篇開發日誌並請AI進行翻譯。
+
+- 新增pre-commit hook來自動執行linting及formatting。
+    - 如果程式碼不符合規範，則無法提交。
+    - 使用[husky](https://typicode.github.io/husky/#/)來管理git hooks。
+    - 使用[lint-staged](https://github.com/okonet/lint-staged)來在提交前自動執行linting及formatting。
+
+- 新增github action，在每次main分支有新的commit時自動merge回到develop跟content分支。
+
+- 新增隱藏、開啟sideBar的按鈕。這樣在螢幕較小的裝置上，就可以透過隱藏sideBar來增加閱讀體驗。
+
+### 更動
+
+- 將linting跟formatting的工具從ESLint及Prettier改為[biome](https://biomejs.dev/)。
+    - biome是一個新興的工具，集成了linting, formatting, type checking等功能，並且底層使用rust開發，速度非常快。
+    - 雖然聽說業界主流還是ESLint及Prettier，但我在python專案中習慣使用[ruff](https://github.com/charliermarsh/ruff)。而聽說ruff參考了biome的前身工具rome，所以就想說試試看biome。
+    - 在.vscode/settings.json中加入存檔自動格式化的設定。
+    - 為彌補少了ESLint的不足，也加強了tsconfig的嚴格程度。
+    - 將之前的程式碼做更動以fit新的規範。
+
+- 將同步到正式網頁的branch從main改成content。這樣未來有新寫好的文章就能立即發布，不需要等合併至main才能發布。
+  
+### 修正
+
+- 修正手機版因螢幕過小，mdx文章內容會超出螢幕寬度，導致sidebar跟header無法延伸至整個螢幕的問題。
+    - 設定各個容器的所放與溢出邏輯來改善此問題。
+
+---
+
+## [v0.3.2] - 2026-02-15
+
+### 修正
+
+- 修正 CVE-2026-0969 的安全漏洞，更新相關套件版本。
+  - 將 next-mdx-remote 的版本從 5.0.0 更新到 6.0.0
+
+---
+
+## [v0.3.1] - 2026-02-15
+
+### 修正
+
+- 修正 CVE-2025-55182 的安全漏洞，更新相關套件版本。
+  - 將 react, react-dom 的版本從 v19.1.0 更新到 v19.2.4
+  - 將 next 的版本從 v15.5.4 更新到 v16.1.6
 
 ---
 
@@ -78,6 +128,11 @@ postPriority: 1
 - 將ESLint(V9)及Prettier引入開發流程。
     - ESLint目前無法與vscode extension整合，之後考慮降版到V8。
 
+- 除了v0.1.1所設計的分支策略外，新增content分支來專門處理文章內容的撰寫及修改。
+    - content分支會從main拉取最新的程式碼，確保文章內容與網站功能同步。
+    - 所有文章的新增及修改都會從content分支拉出feature分支進行，完成後再合併回content。
+    - content分支會在main發布前合併進release分支，並更新部分文章的createdDate及lastModifiedDate。
+
 ---
 
 ## [v0.1.1] - 2025-10-04
@@ -95,6 +150,7 @@ postPriority: 1
       會從main拉取更新，確保develop不會落後。
 
 ---
+
 ## [v0.1.0] - 2025-10-04
 
 ### 新增
