@@ -1,9 +1,9 @@
-import { getPostBySlug } from "@/lib/posts";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { Metadata } from "next/";
+import type { Metadata } from "next/";
 import { notFound } from "next/navigation";
-import remarkMath from "remark-math";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeMathJax from "rehype-mathjax";
+import remarkMath from "remark-math";
+import { getPostBySlug } from "@/lib/posts";
 
 export async function generateMetadata({
   params,
@@ -23,11 +23,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: Promise<{ slug?: string[] }>;
-}) {
+export default async function PostPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const post = await getPostBySlug((await params).slug);
   if (!post) {
     notFound();
@@ -44,7 +40,7 @@ export default async function PostPage({
             : post.frontmatter.createdDate}
         </p>
 
-        <div className="prose-content">
+        <div className="prose-content overflow-x-auto max-w-full">
           <MDXRemote
             source={post.content}
             options={{

@@ -1,25 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { NavNode } from "@/lib/posts";
 import Image from "next/image";
+import Link from "next/link";
+import { useSidebar } from "@/components/SidebarContext";
+import type { NavNode } from "@/lib/posts";
 
 // recursive component to render navigation nodes
-function NavList({
-  nodes,
-  currentSlug,
-}: {
-  nodes: NavNode[];
-  currentSlug: string[];
-}) {
+function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string[] }) {
   if (!nodes || nodes.length === 0) {
     return null;
   }
 
   // sort nodes by title alphabetically
-  nodes.sort(
-    (a, b) => a.postPriority - b.postPriority || a.title.localeCompare(b.title),
-  );
+  nodes.sort((a, b) => a.postPriority - b.postPriority || a.title.localeCompare(b.title));
 
   const currentPath = currentSlug.join("/");
 
@@ -71,15 +64,15 @@ function NavList({
 }
 
 // main sidebar component
-export function Sidebar({
-  navTree,
-  currentSlug,
-}: {
-  navTree: NavNode[];
-  currentSlug: string[];
-}) {
+export function Sidebar({ navTree, currentSlug }: { navTree: NavNode[]; currentSlug: string[] }) {
+  const { isOpen } = useSidebar();
+
   return (
-    <aside className="h-screen sticky top-0 w-full overflow-y-auto bg-stone-200 dark:bg-slate-800 p-4">
+    <aside
+      className={`sticky top-0 w-full overflow-y-auto bg-stone-200 dark:bg-slate-800 p-4 transition-transform duration-300 h-full ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       <Link
         href="/"
         className="block rounded-md px-2 py-1 transition-colors hover:bg-stone-300 dark:hover:bg-slate-700 text-2xl"

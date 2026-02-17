@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "Checking code quality..."
+
+pnpm tsc --noEmit || exit 1
+pnpm lint-staged || exit 1
