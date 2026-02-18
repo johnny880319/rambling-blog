@@ -5,11 +5,14 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 const STORAGE_KEY = "sidebar-open";
 
 interface SidebarContextType {
+  /** Whether the sidebar is open */
   isOpen: boolean;
   toggle: () => void;
   close: () => void;
+  /** Whether the current page has a sidebar (set by SidebarActivator) */
   hasSidebar: boolean;
   setHasSidebar: (value: boolean) => void;
+  /** Drag state shared between SidebarNav and SidebarLayout */
   dragOffset: number;
   isDragging: boolean;
   setDragOffset: (offset: number) => void;
@@ -30,7 +33,6 @@ const SidebarContext = createContext<SidebarContextType>({
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(() => {
-    // on first visit default to open; on refresh/back restore previous state
     if (typeof window === "undefined") {
       return true;
     }
@@ -41,7 +43,6 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  // persist to sessionStorage whenever isOpen changes
   useEffect(() => {
     sessionStorage.setItem(STORAGE_KEY, String(isOpen));
   }, [isOpen]);
@@ -72,7 +73,7 @@ export function useSidebar() {
   return useContext(SidebarContext);
 }
 
-/** Drop this into any layout to activate the sidebar toggle in the header */
+/** Mount in any layout to signal that it contains a sidebar (shows toggle in header). */
 export function SidebarActivator() {
   const { setHasSidebar } = useSidebar();
   useEffect(() => {
