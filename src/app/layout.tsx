@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { SidebarProvider } from "@/components/SidebarContext";
-import { SidebarToggle } from "@/components/SidebarToggle";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { SidebarProvider, SidebarToggle } from "@/components/sidebar";
+import { ThemeProvider, ThemeSwitcher } from "@/components/theme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

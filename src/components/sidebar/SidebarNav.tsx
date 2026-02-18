@@ -2,16 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSidebar } from "@/components/SidebarContext";
 import type { NavNode } from "@/lib/posts";
+import { useSidebar } from "./SidebarContext";
+import { useSidebarDrag } from "./useSidebarDrag";
 
-// recursive component to render navigation nodes
+/** Recursive tree of navigation links. */
 function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string[] }) {
   if (!nodes || nodes.length === 0) {
     return null;
   }
 
-  // sort nodes by title alphabetically
   nodes.sort((a, b) => a.postPriority - b.postPriority || a.title.localeCompare(b.title));
 
   const currentPath = currentSlug.join("/");
@@ -29,7 +29,6 @@ function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string
             <Link
               href={`/posts/${nodePath}`}
               className={`block rounded-md px-2 py-1 transition-colors flex flex-wrap group ${
-                // Highlight active link
                 isActive
                   ? "font-bold text-foreground bg-stone-400 dark:bg-gray-600"
                   : "hover:bg-foreground hover:text-background"
@@ -52,7 +51,6 @@ function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string
               {node.title}
             </Link>
 
-            {/* only render children if node is open */}
             {isOpen && node.children && node.children.length > 0 && (
               <NavList nodes={node.children} currentSlug={currentSlug} />
             )}
@@ -63,15 +61,26 @@ function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string
   );
 }
 
-// main sidebar component
-export function Sidebar({ navTree, currentSlug }: { navTree: NavNode[]; currentSlug: string[] }) {
+/** The sidebar panel: logo, nav tree, and swipe-to-close gesture. */
+export function SidebarNav({
+  navTree,
+  currentSlug,
+}: {
+  navTree: NavNode[];
+  currentSlug: string[];
+}) {
   const { isOpen } = useSidebar();
+  const { onTouchStart, onTouchMove, onTouchEnd, dragStyle } = useSidebarDrag();
 
   return (
     <aside
       className={`sticky top-0 w-full overflow-y-auto bg-stone-200 dark:bg-slate-800 p-4 transition-transform duration-300 h-full ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
+      style={dragStyle}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       <Link
         href="/"

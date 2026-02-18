@@ -7,15 +7,14 @@ export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  // ensure component is mounted before accessing theme to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
+
   if (!mounted) {
     return null;
   }
 
-  // after mounted, we can access the theme
   return (
     <button
       type="button"
