@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback, useRef } from "react";
 import { useSidebar } from "@/components/SidebarContext";
 import type { NavNode } from "@/lib/posts";
 
@@ -65,13 +66,55 @@ function NavList({ nodes, currentSlug }: { nodes: NavNode[]; currentSlug: string
 
 // main sidebar component
 export function Sidebar({ navTree, currentSlug }: { navTree: NavNode[]; currentSlug: string[] }) {
-  const { isOpen } = useSidebar();
+  const { isOpen, close, dragOffset, isDragging, setDragOffset, setIsDragging } = useSidebar();
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      const x = e.touches[0]?.clientX;
+      if (x !== undefined) {
+        touchStartX.current = x;
+        setIsDragging(true);
+        setDragOffset(0);
+      }
+    },
+    [setIsDragging, setDragOffset],
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (touchStartX.current === null) {
+        return;
+      }
+      const currentX = e.touches[0]?.clientX;
+      if (currentX !== undefined) {
+        const delta = currentX - touchStartX.current;
+        // clamp: allow slight right overscroll (+20px) but full left drag
+        setDragOffset(Math.max(Math.min(delta, 20), -320));
+      }
+    },
+    [setDragOffset],
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    // if dragged left past 30% of sidebar width (~96px), close
+    if (dragOffset < -96) {
+      close();
+    }
+    setDragOffset(0);
+    setIsDragging(false);
+    touchStartX.current = null;
+  }, [dragOffset, close, setDragOffset, setIsDragging]);
 
   return (
     <aside
       className={`sticky top-0 w-full overflow-y-auto bg-stone-200 dark:bg-slate-800 p-4 transition-transform duration-300 h-full ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
+      style={isDragging ? { transform: `translateX(${dragOffset}px)`, transition: "none" } : {}}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <Link
         href="/"

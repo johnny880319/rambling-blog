@@ -2,6 +2,7 @@
 
 import { Sidebar } from "@/components/Sidebar";
 import { SidebarActivator } from "@/components/SidebarContext";
+import { SidebarOverlay } from "@/components/SidebarOverlay";
 import { SidebarWrapper } from "@/components/SidebarWrapper";
 import { getPostsHierarchy } from "@/lib/posts";
 
@@ -19,11 +20,12 @@ export default async function PostsLayout({
   return (
     <>
       <SidebarActivator />
-      <div className="flex w-full overflow-x-clip h-[calc(100vh-2.5rem)]">
+      <div className="flex w-full overflow-x-clip h-[calc(100vh-2.5rem)] relative">
         <SidebarWrapper>
           <Sidebar navTree={await navTree} currentSlug={currentSlug} />
         </SidebarWrapper>
-        <main className="flex-1 min-w-0 p-8 overflow-y-auto overflow-x-hidden">
+        <SidebarOverlay />
+        <main className="flex-1 min-w-0 p-8 overflow-y-auto overflow-x-hidden relative">
           {/* children represent the actual page content (page.tsx) */}
           {children}
         </main>
