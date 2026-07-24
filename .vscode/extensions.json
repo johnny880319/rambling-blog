@@ -1,0 +1,9 @@
+{
+  "// note": "Recommended extensions for working on the blog. VS Code prompts to install these on open. Safe to commit — this file is meant to be shared.",
+  "recommendations": [
+    "biomejs.biome",
+    "unifiedjs.vscode-mdx",
+    "bradlc.vscode-tailwindcss",
+    "shd101wyy.markdown-preview-enhanced"
+  ]
+}

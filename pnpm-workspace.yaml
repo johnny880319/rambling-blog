@@ -1,3 +1,8 @@
+# Answers pnpm 11's build-approval prompt. sharp is Next.js's image-optimization
+# dependency and was already whitelisted in onlyBuiltDependencies below, so allow it.
+allowBuilds:
+  sharp: true
+
 onlyBuiltDependencies:
   - "@tailwindcss/oxide"
   - sharp
