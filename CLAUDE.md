@@ -82,7 +82,7 @@ These are the conventions the git history already follows — keep to them.
   - A hotfix is just another short-lived branch — there is no separate hotfix flow.
   - Vercel's per-branch preview deployments replace what `develop`/`release` used to provide.
   - **Retired:** `develop`, `release`, `content` (the last was for note content, now a submodule). `.github/workflows/sync-branches.yml` existed only to back-propagate `main` into those branches and is obsolete.
-- **Versioning: SemVer** (`v0.5.0`, `v0.4.1` hotfix) applied as **git tags on `main`** (no release branches). The changelog is kept as the dev-log note inside the notes repo (`content/site-development/dev-log`).
+- **Versioning: SemVer** (`v0.5.0`, `v0.4.1` hotfix) applied as **git tags on `main`** (no release branches). Release notes are written in **GitHub Releases** when tagging; the old hand-maintained dev-log note was removed as redundant with git history + these ADRs.
 - **Pre-commit (husky + lint-staged):** every commit runs `tsc --noEmit` then biome via lint-staged. Commits fail on type or lint errors.
 - **Formatting/linting: Biome** (`biome.json`). Biome is the default formatter (`.vscode/settings.json`); format-on-save and organize-imports are on.
 
