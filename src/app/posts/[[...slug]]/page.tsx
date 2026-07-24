@@ -18,8 +18,8 @@ export async function generateMetadata({
     };
   }
   return {
-    title: post.frontmatter.title,
-    description: post.frontmatter.description || post.frontmatter.title,
+    title: post.title,
+    description: post.frontmatter.description || post.title,
   };
 }
 
@@ -31,14 +31,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug?: st
   return (
     <main className="container mx-auto px-4 py-8">
       <article className="prose lg:prose-xl mx-auto dark:prose-invert">
-        <h1 className="text-4xl font-bold mb-2">{post.frontmatter.title}</h1>
-        <p className="text-gray-500">建立於{post.frontmatter.createdDate}</p>
-        <p className="text-gray-500 mb-8">
-          最後修改於
-          {post.frontmatter.lastModifiedDate
-            ? post.frontmatter.lastModifiedDate
-            : post.frontmatter.createdDate}
-        </p>
+        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
+        {post.frontmatter.createdDate && (
+          <p className="text-gray-500">建立於{post.frontmatter.createdDate}</p>
+        )}
+        {(post.frontmatter.lastModifiedDate || post.frontmatter.createdDate) && (
+          <p className="text-gray-500 mb-8">
+            最後修改於
+            {post.frontmatter.lastModifiedDate ?? post.frontmatter.createdDate}
+          </p>
+        )}
 
         <div className="prose-content overflow-x-auto max-w-full">
           <MDXRemote
