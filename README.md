@@ -1,6 +1,6 @@
-# Rambling Blog
+# Rambling Notes
 
-This is the source code for my personal blog, "Rambling Blog." It's built with Next.js, Tailwind CSS, and MDX to provide a clean, fast, and developer-friendly platform for my notes, thoughts, and technical explorations.
+This is the source code for my personal note site, "Rambling Notes" (碎碎念的地方). It's built with Next.js, Tailwind CSS, and MDX to provide a clean, fast, and developer-friendly platform for my notes, thoughts, and technical explorations.
 
 ### A Note on Development
 

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rambling Blog",
-  description: "A blog about my thoughts and experiences",
+  title: "Rambling Notes",
+  description: "數學、程式，與各種碎碎念的筆記。",
 };
 
 export default function RootLayout({
