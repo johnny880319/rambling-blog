@@ -2,6 +2,7 @@ import type { Metadata } from "next/";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeMathJax from "rehype-mathjax";
+import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { getPostBySlug } from "@/lib/posts";
 
@@ -47,7 +48,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug?: st
             source={post.content}
             options={{
               mdxOptions: {
-                remarkPlugins: [remarkMath],
+                remarkPlugins: [remarkGfm, remarkMath],
                 rehypePlugins: [rehypeMathJax],
               },
             }}
