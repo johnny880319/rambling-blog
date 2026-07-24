@@ -89,7 +89,7 @@ Notes are **not** edited here — they live in the `rambling-notes` submodule. E
 
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/) — `type(scope): subject` (`feat`, `fix`, `docs`, `chore`, `ci`, `refactor`).
 - **Branching:** [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow) — `main` is the only long-lived branch and is always deployable. Work happens on short-lived branches off `main` (`feat|fix|docs|chore|ci|refactor/…`), reviewed via PR, then merged back. *(Migrated from git flow — see [ADR 0001](docs/decisions/0001-adopt-github-flow.md).)*
-- **Versioning:** [Semantic Versioning](https://semver.org/) via git tags on `main`; the changelog is the dev-log note in the notes repo.
+- **Versioning:** [Semantic Versioning](https://semver.org/) via git tags on `main`; release notes live in [GitHub Releases](https://github.com/johnny880319/rambling-blog/releases).
 - **Quality gate:** husky pre-commit runs type-check + Biome (lint-staged). Commits fail on errors.
 
 More detail for contributors and AI agents is in [CLAUDE.md](CLAUDE.md).

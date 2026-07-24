@@ -35,7 +35,7 @@ Adopt **GitHub Flow**:
 - A hotfix is just another short-lived branch — no separate hotfix flow.
 - **Versioning moves from release branches to git tags on `main`.** SemVer is unchanged; releases are tagged (`v0.5.0`) rather than cut as branches.
 
-Unchanged by this decision: **Conventional Commits**, **SemVer**, the husky/lint-staged pre-commit quality gate, and the dev-log-as-changelog habit.
+Unchanged by this decision: **Conventional Commits**, **SemVer**, and the husky/lint-staged pre-commit quality gate. (The dev-log-as-changelog habit mentioned here was dropped shortly after — release notes now live in GitHub Releases and the dev-log note was removed.)
 
 ## Consequences
 
